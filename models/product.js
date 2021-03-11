@@ -54,6 +54,16 @@ const productSchema = mongoose.Schema({
   },
 });
 
+// forma de mostrar el id sin el _
+
+productSchema.virtual("id").get(function () {
+  return this._id.toHexString();
+});
+
+productSchema.set("toJSON", {
+  virtuals: true,
+});
+
 // model se lo llama en node = collection que se lo llama en mongo --> TABLA
 
 exports.Product = mongoose.model("Product", productSchema);
